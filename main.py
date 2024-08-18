@@ -1,14 +1,17 @@
 from fastapi import FastAPI
+from config.db import init_db 
 from routes import users
 
-app = FastAPI()
-app.version = '0.0.1'
-app.title = 'MovieApi'
+app = FastAPI(
+    title= 'MovieAp',
+    version= ' 0.0.10',
+)
 
-### Routes ###
+""" Inicializar la base de datos y crear las tablas """
+init_db()
+
+""" Rutas """
 app.include_router(users.router)
 
-@app.get('/')
-def root():
-    return {'conection': True}
+
 
